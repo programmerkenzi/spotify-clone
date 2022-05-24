@@ -1,38 +1,21 @@
 <template>
   <div class="flex flex-row justify-center h-28 bg-light">
     <!-- buttons -->
-    <!-- play&stop -->
-
-    <div class="flex flex-col justify-center w-1/2 h-full">
-      <div class="flex flex-row self-center text-white cursor-pointer">
-        <svg
+    <div class="flex flex-col justify-center w-1/3 h-full p-5 space-y-2">
+      <div class="flex flex-row space-x-3 text-white cursor-pointe">
+        <span class="material-icons small-btn">shuffle</span>
+        <span class="material-icons small-btn">skip_previous</span>
+        <span
           v-if="!playing"
+          class="material-icons large-btn"
           @click="playing = true"
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-12 h-12"
-          viewBox="0 0 20 20"
-          fill="currentColor"
+          >play_circle</span
         >
-          <path
-            fill-rule="evenodd"
-            d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-            clip-rule="evenodd"
-          />
-        </svg>
-        <svg
-          v-else
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-12 h-12"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          @click="playing = false"
+        <span v-else class="material-icons large-btn" @click="playing = false"
+          >stop_circle</span
         >
-          <path
-            fill-rule="evenodd"
-            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z"
-            clip-rule="evenodd"
-          />
-        </svg>
+        <span class="material-icons small-btn">skip_next</span>
+        <span class="material-icons small-btn">loop</span>
       </div>
       <!-- progress -->
       <div
@@ -41,7 +24,7 @@
         <span class="">00:00</span>
         <input
           type="range"
-          class="self-center w-full h-1"
+          class=""
           v-model="progress"
           @input="updateProgress"
         />
@@ -71,12 +54,14 @@ export default {
       ],
       playing: false,
       progress: 0,
+      background: "red",
     };
   },
   methods: {
     updateProgress: function (e) {
       console.log("this.progress", this.progress);
       this.progress = e.target.value;
+      this.$el.style.setProperty("--progress", this.progress + "%");
     },
   },
 };
@@ -96,7 +81,7 @@ input[type="range"] {
   background: rgba(255, 255, 255, 0.25);
   border-radius: 5px;
   background-image: linear-gradient(#ffffff, #ffffff);
-  background-size: var(progress) 100%;
+  background-size: var(--progress) 100%;
   background-repeat: no-repeat;
 }
 
@@ -107,13 +92,14 @@ input[type="range"]:hover {
   background: rgba(255, 255, 255, 0.25);
   border-radius: 5px;
   background-image: linear-gradient(#1db954, #1db954);
-  background-size: 70% 100%;
+  background-size: var(--progress) 100%;
   background-repeat: no-repeat;
 }
 
 /* Input Thumb */
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
+  opacity: 0;
   height: 12px;
   width: 12px;
   border-radius: 50%;
@@ -121,10 +107,17 @@ input[type="range"]::-webkit-slider-thumb {
   cursor: ew-resize;
   box-shadow: 0 0 2px 0 #555;
   transition: background 0.3s ease-in-out;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  -webkit-appearance: none;
+  opacity: 1;
+  display: block;
 }
 
 input[type="range"]::-moz-range-thumb {
   -webkit-appearance: none;
+  opacity: 0;
   height: 12px;
   width: 12px;
   border-radius: 50%;
@@ -134,8 +127,15 @@ input[type="range"]::-moz-range-thumb {
   transition: background 0.3s ease-in-out;
 }
 
+input[type="range"]::-moz-range-thumb:hover {
+  -webkit-appearance: none;
+  opacity: 1;
+  display: block;
+}
+
 input[type="range"]::-ms-thumb {
   -webkit-appearance: none;
+  opacity: 0;
   height: 12px;
   width: 12px;
   border-radius: 50%;
@@ -143,6 +143,12 @@ input[type="range"]::-ms-thumb {
   cursor: ew-resize;
   box-shadow: 0 0 2px 0 #555;
   transition: background 0.3s ease-in-out;
+}
+
+input[type="range"]::-ms-thumb:hover {
+  -webkit-appearance: none;
+  opacity: 1;
+  display: block;
 }
 
 /* Input Track */
@@ -165,5 +171,29 @@ input[type="range"]::-ms-track {
   box-shadow: none;
   border: none;
   background: transparent;
+}
+
+.large-btn {
+  font-size: 48px;
+  transition: all 0.2s linear;
+}
+
+.large-btn:hover {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.small-btn {
+  font-size: 32px;
+  opacity: 0.5;
+  margin: auto 0;
+  transition: all 0.2s linear;
+}
+
+.small-btn:hover {
+  opacity: 1;
 }
 </style>
