@@ -34,10 +34,12 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     '@nuxt/postcss8',
+    ['@nuxtjs/dotenv', { filename: '.env.local' }]
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    'nuxt-vuex-localstorage'
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -49,4 +51,5 @@ export default {
       },
     },
   }
+
 }

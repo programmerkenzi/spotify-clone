@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-row justify-center h-28 bg-light">
+  <div class="flex flex-row justify-center h-24 bg-light">
     <!-- buttons -->
     <div class="flex flex-col justify-center w-1/3 h-full p-5 space-y-2">
-      <div class="flex flex-row space-x-3 text-white cursor-pointe">
+      <div class="flex flex-row self-center space-x-3 text-white cursor-pointe">
         <span class="material-icons small-btn">shuffle</span>
         <span class="material-icons small-btn">skip_previous</span>
         <span
@@ -19,12 +19,12 @@
       </div>
       <!-- progress -->
       <div
-        class="flex flex-row justify-around w-full space-x-1 text-xs text-center text-white text-opacity-75"
+        class="flex flex-row self-center justify-around w-full my-auto space-x-1 text-xs text-center text-white text-opacity-75"
       >
         <span class="">00:00</span>
         <input
           type="range"
-          class=""
+          class="self-center"
           v-model="progress"
           @input="updateProgress"
         />
